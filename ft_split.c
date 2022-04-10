@@ -1,40 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 17:24:06 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/10 14:41:40 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/10 10:07:38 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/10 11:05:00 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int	i;
+	unsigned char	**str;
 
-	i = 0;
-	if ((char)s[0] == (char)c)
-		return ((char *)s);
-	while (s[i] && (char)s[i] != (char)c)
-		i++;
-	if (c == '\0')
-		return (&((char *)s)[i]);
-	if (s[i] == '\0')
+	str = NULL;	
+	size = 0;
+	if ((str = (unsigned char **)malloc(count)) == NULL)
 		return (NULL);
-	return (&((char *)s)[i]);
+	while (count > 0)
+	{
+		if ((str[count - 1] = (unsigned char *)malloc(size)) == NULL)
+			return (NULL);
+		count--;
+	} 
+	return (str);
 }
 /*
 int	main(void)
 {
-	char	s[] = "tripouille";
+	char	**str1;
+	char	**str2;
 
-	printf("t: %c\n", 't');
-//	printf("Original function: %s\n", strchr(s, 't'));
-	printf("My function: %s\n", ft_strchr(s, 't' + 256));
+	str2 = calloc(30, 1);
+	str1 = ft_calloc(30, 1);
+
+	str1[0] = "hola";
+	str2[0] = "hl";
+	write(1, str1, 30);
+	write(1, "\n", 1);
+	write(1, str2, 30);
+	free(str2);
+	free(str1);
 	return (0);
 }
 */

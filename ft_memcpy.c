@@ -6,7 +6,7 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 08:20:11 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/02 11:57:42 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/09 08:37:22 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 		i++;
 		n--;
 	}
-	return (dst);
+	return ((unsigned char *)dst);
 }
 /*
 //#include <stdio.h>

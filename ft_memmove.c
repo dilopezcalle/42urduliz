@@ -6,25 +6,21 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 11:58:19 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/03 13:00:59 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/09 08:54:39 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdlib.h>
-
-size_t	ft_strlen(const char *s);
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
+#include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*temp;
+	unsigned char	*temp;
 
-	temp = (char *)malloc(len);
-	ft_memcpy(temp, src, len);
-	ft_memcpy(dst, temp, len);
+	temp = (unsigned char *)malloc(len);
+	ft_memcpy(temp, (unsigned char *)src, len);
+	ft_memcpy((unsigned char *)dst, temp, len);
 	free(temp);
-	return (dst);
+	return ((unsigned char *)dst);
 }
 /*
 #include <stdio.h>

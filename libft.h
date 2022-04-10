@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 17:37:01 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/03 13:15:23 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/09 07:34:11 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/10 10:39:54 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <ctype.h>
-# include <stddef.h>
-# include <string.h>
-# include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stddef.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 /*
 typedef struct s_list
 {
@@ -38,7 +39,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-/*
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strchr(const char *s, int c);
@@ -50,6 +50,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
+/*
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin(char const *s1, char const *s2);

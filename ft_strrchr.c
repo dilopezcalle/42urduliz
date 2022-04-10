@@ -6,7 +6,7 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:13:55 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/04 20:11:41 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/10 17:55:25 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,30 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	size;
+	unsigned char	chr;
+	int				size;
 
-	size = ft_strlen(s) - 1;
-	if ((c == '\0' && size < 0) || s[0] == c)
-		return ((char *)s);
-	if (c == '\0')
-		return (&((char *)s)[size + 1]);
-	while (s[size] && s[size] != c && size > 0)
-		size--;
-	if (size <= 0)
+	if ((unsigned char)c == '\0')
+		return ((char *)s + ft_strlen(s));
+	if (!ft_strchr(s, (unsigned char)c))
 		return (NULL);
-	return (&((char *)s)[size]);
+	chr = c;
+	size = ft_strlen(s) - 1;
+	while (s[size])
+	{
+		if ((unsigned char)s[size] == chr)
+			return ((char *)s + size);
+		size--;
+	}
+	return (NULL);
 }
 /*
 int main(void)
 {
-	char	s[] = "bonjour";
+	char	s[] = "ltripouiel";
 
-	printf("Original function: %s\n", strrchr(s, 's'));
-	printf("My function: %s\n", ft_strrchr(s, 's'));
+	printf("Original function: %s\n", strrchr(s, 'z'));
+	printf("My function: %s\n", ft_strrchr(s, 'z'));
 	return (0);
 }
 */
