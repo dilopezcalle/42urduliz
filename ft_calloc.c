@@ -6,19 +6,19 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 11:07:20 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/10 18:06:08 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/18 10:21:47 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+#include <stdlib.h>
+
 void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*str;
+	void	*str;
 
-	if (size == 0 || count == 0 || count >= SIZE_MAX / size)
-		return (NULL);
-	str = (unsigned char *)malloc(count * size);
+	str = (void *)malloc(count * size);
 	if (str == NULL)
 		return (NULL);
 	ft_memset(str, '\0', count * size);

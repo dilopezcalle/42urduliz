@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 07:27:13 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 11:07:42 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/17 17:05:46 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/18 10:23:45 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
+#include <stdlib.h>
 
-void	*ft_memset(void *b, int c, size_t len);
-
-void	ft_bzero(void *s, size_t n)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	ft_memset(s, '\0', n);
+	char			*str;
+	unsigned int	i;
+	int				size;
+
+	size = 0;
+	i = 0;
+	size = ft_strlen(s);
+	str = (char *)malloc(size + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[size] = '\0';
+	return (str);
 }
 /*
-#include <stdio.h>
-#include <unistd.h>
-#include <strings.h>
-
 int	main(void)
 {
-	char	s[] = "aaaaa";
-	char	s2[] = "";
-
-	bzero(s2, 2);
-	write(1, s2, 6);
-	write(1, "\n", 1);
-
-	ft_bzero(s, 2);
-	write(1, s, 6);
-	write(1, "\n", 1);
+	
+	
 	return (0);
 }
 */

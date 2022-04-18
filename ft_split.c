@@ -1,49 +1,96 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/10 10:07:38 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/10 11:05:00 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/15 15:49:54 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/17 19:03:14 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	ft_split_check_rows(char const *s, char c)
 {
-	unsigned char	**str;
+	int	rows;
+	int	i;
 
-	str = NULL;	
-	size = 0;
-	if ((str = (unsigned char **)malloc(count)) == NULL)
-		return (NULL);
-	while (count > 0)
+	i = 0;
+	rows = 0;
+	while (s[i])
 	{
-		if ((str[count - 1] = (unsigned char *)malloc(size)) == NULL)
+		if (s[i] != c)
+			rows++;
+		while (s[i] && s[i] != c)
+			i++;
+		i++;
+	}
+	return (rows);
+}
+
+char	*ft_split_check_chars(char const *s, char c, int row)
+{
+	int		i;
+	int		counter;
+	char	*str_row;
+
+	str_row = NULL;
+	i = -1;
+	counter = -1;
+	while (s[++i])
+	{
+		if (s[i] != c)
+			counter++;
+		if (counter == row && s[i] != c)
+		{
+			counter = i;
+			while (s[counter] && s[counter] != c)
+				counter++;
+			str_row = ft_substr(s, i, counter - i);
+			if (!str_row)
+				return (NULL);
+		}
+		while (s[i] && s[i] != c)
+			i++;
+	}
+	return (str_row);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**bi_str;
+	int		rows;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	rows = ft_split_check_rows(s, c);
+	if (c == '\0' && ft_strlen(s) > 0)
+		rows = 1;
+	bi_str = (char **)ft_calloc(rows + 1, sizeof(char *));
+	if (bi_str == NULL)
+		return (NULL);
+	i = 0;
+	while (i < rows)
+	{
+		bi_str[i] = ft_split_check_chars(s, c, i);
+		if (bi_str[i] == NULL)
 			return (NULL);
-		count--;
-	} 
-	return (str);
+		i++;
+	}
+	bi_str[i] = NULL;
+	return (bi_str);
 }
 /*
 int	main(void)
 {
-	char	**str1;
-	char	**str2;
+	char	**bi_str;
 
-	str2 = calloc(30, 1);
-	str1 = ft_calloc(30, 1);
-
-	str1[0] = "hola";
-	str2[0] = "hl";
-	write(1, str1, 30);
-	write(1, "\n", 1);
-	write(1, str2, 30);
-	free(str2);
-	free(str1);
+	bi_str = ft_split("h o l a a a b u e n a s", ' ');
+	printf("String: %s \n", bi_str[0]);
+	free(bi_str);
 	return (0);
 }
 */

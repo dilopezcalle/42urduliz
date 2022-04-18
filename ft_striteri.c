@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 07:27:13 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 11:07:42 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/18 08:54:02 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/18 09:02:58 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len);
-
-void	ft_bzero(void *s, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	ft_memset(s, '\0', n);
+	unsigned int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }
 /*
-#include <stdio.h>
-#include <unistd.h>
-#include <strings.h>
-
 int	main(void)
 {
-	char	s[] = "aaaaa";
-	char	s2[] = "";
-
-	bzero(s2, 2);
-	write(1, s2, 6);
-	write(1, "\n", 1);
-
-	ft_bzero(s, 2);
-	write(1, s, 6);
-	write(1, "\n", 1);
 	return (0);
 }
 */

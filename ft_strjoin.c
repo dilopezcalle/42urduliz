@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 07:27:13 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 11:07:42 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/14 16:48:15 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/17 15:21:20 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len);
-
-void	ft_bzero(void *s, size_t n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	ft_memset(s, '\0', n);
+	char			*str;
+	unsigned int	size;
+
+	size = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *)ft_calloc(size + 1, 1);
+	if (!str)
+		return (NULL);
+	ft_memmove(str, s1, ft_strlen(s1) + 1);
+	ft_strlcat(str, s2, size + 1);
+	return (str);
 }
 /*
-#include <stdio.h>
-#include <unistd.h>
-#include <strings.h>
-
 int	main(void)
 {
-	char	s[] = "aaaaa";
-	char	s2[] = "";
+	char	*str;
 
-	bzero(s2, 2);
-	write(1, s2, 6);
-	write(1, "\n", 1);
-
-	ft_bzero(s, 2);
-	write(1, s, 6);
-	write(1, "\n", 1);
+	str = ft_strjoin("hola ", "buenas");
+	printf("String: %s\n", str);
+	free(str);
 	return (0);
 }
 */

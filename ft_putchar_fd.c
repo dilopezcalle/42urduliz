@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 07:27:13 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 11:07:42 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/18 09:05:22 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/18 10:24:43 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
+#include <unistd.h>
 
-void	*ft_memset(void *b, int c, size_t len);
-
-void	ft_bzero(void *s, size_t n)
+void	ft_putchar_fd(char c, int fd)
 {
-	ft_memset(s, '\0', n);
+	write(fd, &c, 1);
 }
 /*
-#include <stdio.h>
-#include <unistd.h>
-#include <strings.h>
+#include <fcntl.h>
 
 int	main(void)
 {
-	char	s[] = "aaaaa";
-	char	s2[] = "";
-
-	bzero(s2, 2);
-	write(1, s2, 6);
-	write(1, "\n", 1);
-
-	ft_bzero(s, 2);
-	write(1, s, 6);
-	write(1, "\n", 1);
+	int	fd;
+	
+	fd = open("prueba.txt", O_RDWR | O_CREAT);
+	ft_putchar_fd('J', fd);
 	return (0);
 }
 */

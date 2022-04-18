@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:13:15 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/10 16:55:09 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/17 13:46:23 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	i = 0;
 	while (s1[i] && s2[i] && n > 0)
 	{
-		if (s1[i] > s2[i])
+		if ((unsigned char)s1[i] > (unsigned char)s2[i])
 			return (1);
-		else if (s1[i] < s2[i])
+		else if ((unsigned char)s1[i] < (unsigned char)s2[i])
 			return (-1);
 		n--;
 		i++;
@@ -35,8 +35,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 /*
 int	main(void)
 {
-	char	s1[] = "test";
-	char	s2[] = "test\0";
+	char	s1[] = "\x12\xff\x65\x12\xbd\xde\xad";
+	char	s2[] = "\x12\x02";
 	size_t	n = 6;
 
 	printf("Original function: %d\n", strncmp(s1, s2, n));
