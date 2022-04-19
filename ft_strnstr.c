@@ -12,32 +12,31 @@
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 {
-	unsigned int	size;
-	size_t			i;
+	size_t	i;
+	size_t	j;
+	size_t	num;
 
-	i = -1;
-	size = ft_strlen(needle);
-	if (size == 0)
-		return ((char *)haystack);
-	if (size < len)
+	j = 0;
+	i = 0;
+	num = 0;
+	while (to_find[num])
+		num++;
+	if (num == 0)
+		return ((char *)&str[0]);
+	while (str[i] && i < n)
 	{
-		if (len > 2)
-			if (ft_memchr(haystack, needle[0], len - 3) == NULL)
-				return (NULL);
-		if (ft_memchr(haystack, needle[0], len) == NULL)
-			return (NULL);
-		while (++i < len)
+		if (str[i] == to_find[j])
 		{
-			if (ft_strncmp(needle, ft_memchr(haystack + i, needle[0], len),
-					size) == 0)
-				return (ft_strchr(haystack + i, needle[0]));
-			len--;
+			while (str[j + i] == to_find[j] && to_find[j] && n > i + j)
+				j++;
+			if (j == num)
+				return ((char *)&str[i]);
 		}
+		j = 0;
+		i++;
 	}
-	if (ft_strncmp(haystack, needle, size) == 0)
-		return ((char *)haystack);
 	return (NULL);
 }
 /*
