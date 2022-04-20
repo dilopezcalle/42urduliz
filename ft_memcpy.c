@@ -6,15 +6,11 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 08:20:11 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 13:46:21 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/20 11:47:41 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-
-void	ft_bzero(void *s, size_t n);
-size_t	ft_strlen(const char *s);
+#include "libft.h"
 
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {

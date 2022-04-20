@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 07:32:27 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/18 14:38:22 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/19 17:37:20 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/20 11:34:08 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	unsigned char	*str;
-	size_t			i;	
+	t_list	*final_lst;
+	t_list	*aux;
 
-	str = (unsigned char *)s;
-	i = 0;
-	while ((unsigned int)i < (unsigned int)n)
+	if (!lst && !*del && !*f)
+		return (NULL);
+	final_lst = NULL;
+	while (lst)
 	{
-		if (str[i] == (unsigned char)c)
-			return ((void *)(s + i));
-		i++;
+		aux = ft_lstnew((*f)(lst->content));
+		ft_lstadd_back(&final_lst, aux);
+		lst = lst->next;
 	}
-	return (NULL);
+	return (final_lst);
 }
 /*
 int	main(void)
 {
-	char	s[] = "";
-
-	printf("Original function: %s\n", memchr(s, 2, 3));
-	printf("My function: %s\n", ft_memchr(s, 2, 3));
-	printf("size: %d\n". ft_strlen())
 	return (0);
 }
 */

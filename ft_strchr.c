@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:24:06 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/10 14:41:40 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/20 11:50:25 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	while (s[i] && (char)s[i] != (char)c)
 		i++;
-	if (c == '\0')
+	if ((char)c == '\0')
 		return (&((char *)s)[i]);
 	if (s[i] == '\0')
 		return (NULL);
@@ -30,11 +30,11 @@ char	*ft_strchr(const char *s, int c)
 /*
 int	main(void)
 {
-	char	s[] = "tripouille";
+//	char	s[] = "tripouille";
 
 	printf("t: %c\n", 't');
-//	printf("Original function: %s\n", strchr(s, 't'));
-	printf("My function: %s\n", ft_strchr(s, 't' + 256));
+	printf("Original function: %s\n", strchr("teste", '\0'));
+	printf("My function: %s\n", ft_strchr("teste", '\0'));
 	return (0);
 }
 */

@@ -6,23 +6,38 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:48:15 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 15:21:20 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:43:37 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char			*str;
 	unsigned int	size;
+	int				i;
+	int				j;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)ft_calloc(size + 1, 1);
+	str = (char *)malloc(size + 1);
 	if (!str)
 		return (NULL);
-	ft_memmove(str, s1, ft_strlen(s1) + 1);
-	ft_strlcat(str, s2, size + 1);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[size] = '\0';
 	return (str);
 }
 /*

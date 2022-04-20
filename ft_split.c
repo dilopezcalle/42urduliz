@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:49:54 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 19:03:14 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/19 18:32:16 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	ft_split_check_rows(char const *s, char c)
 			rows++;
 		while (s[i] && s[i] != c)
 			i++;
-		i++;
+		if (s[i])
+			i++;
 	}
 	return (rows);
 }
@@ -39,7 +40,7 @@ char	*ft_split_check_chars(char const *s, char c, int row)
 	str_row = NULL;
 	i = -1;
 	counter = -1;
-	while (s[++i])
+	while (++i < (int)ft_strlen(s) && s[i])
 	{
 		if (s[i] != c)
 			counter++;
@@ -88,8 +89,8 @@ int	main(void)
 {
 	char	**bi_str;
 
-	bi_str = ft_split("h o l a a a b u e n a s", ' ');
-	printf("String: %s \n", bi_str[0]);
+	bi_str = ft_split("hello!", ' ');
+	printf("String: %s \n", bi_str[2]);
 	free(bi_str);
 	return (0);
 }

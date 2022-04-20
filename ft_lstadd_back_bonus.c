@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 07:32:27 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/18 14:38:22 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/04/19 15:03:54 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/04/19 17:57:51 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	unsigned char	*str;
-	size_t			i;	
+	t_list	*last_list;
 
-	str = (unsigned char *)s;
-	i = 0;
-	while ((unsigned int)i < (unsigned int)n)
+	last_list = ft_lstlast(*lst);
+	if (*lst == NULL)
+		*lst = new;
+	else
 	{
-		if (str[i] == (unsigned char)c)
-			return ((void *)(s + i));
-		i++;
+		if (last_list == NULL)
+			return ;
+		last_list->next = new;
 	}
-	return (NULL);
 }
 /*
 int	main(void)
 {
-	char	s[] = "";
+	t_list	*list = NULL;
+	t_list	*el_1;
+	t_list	*el_2;
 
-	printf("Original function: %s\n", memchr(s, 2, 3));
-	printf("My function: %s\n", ft_memchr(s, 2, 3));
-	printf("size: %d\n". ft_strlen())
+	
+
+	ft_lstadd_front(&list, el_1);
+	ft_lstadd_front(&list, el_2);
 	return (0);
 }
 */

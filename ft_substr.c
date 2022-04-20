@@ -6,11 +6,13 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:38:10 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/18 10:22:25 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:28:47 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+#include <stdlib.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -40,13 +42,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[index] = '\0';
 	return (str);
 }
+
 /*
 int	main(void)
 {
-	char	s[] = "lorem ipsum dolor sit amet";
-	char	*sub;
+	char	s[] = "hola";
+	char	*sub; 
 	
-	sub = ft_substr(s, 400, 20);
+	sub = ft_substr(s, 0, 18446);
 	printf("Substring:\n");
 	write(1, sub, 26);
 	write(1, "\n", 1);

@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 08:27:53 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/15 15:39:05 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/19 10:19:44 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 	}
 	return (NULL);
 }
+
 /*
 int	main(void)
 {

@@ -6,7 +6,7 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 11:58:19 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/04/17 13:45:56 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/04/18 11:57:41 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	temp_dst = (unsigned char *)dst;
 	if (dst < src)
 		return (ft_memcpy(temp_dst, temp_src, len));
-	while (len--)
+	while (len-- > 0)
+	{
 		temp_dst[len] = temp_src[len];
+	}
 	return (dst);
 }
 /*
