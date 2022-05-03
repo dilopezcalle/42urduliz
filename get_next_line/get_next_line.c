@@ -48,14 +48,11 @@ char	*get_next_line(int fd)
 	static char	*str;
 
 	aux = read_fd_buffer_size(fd, str);
-	line = ft_strjoin("", aux);
-	// Separar antes y luego de linea
-	free(aux);
-	str = ft_substr(line, ft_strnl(line), ft_strlen(line));
-	aux = ft_strjoin("", line);
-	free(line);
+	if (str)
+		free(str);
+	str = ft_substr(aux, ft_strnl(aux), ft_strlen(aux));
 	line = ft_substr(aux, 0, ft_strnl(aux));
-	printf("string: %s\n", str);
+	//printf("string: %s\n", str);
 	free(str);
 	free(aux);
 	return (line);
@@ -68,7 +65,7 @@ int	main(void)
 
 	line = get_next_line(fd);
 	//printf("%d\n", ft_strnl(line));
-	printf("Linea: %s\n", line);
+	//printf("Linea: %s\n", line);
 	free(line);
 	return (0);
 }
