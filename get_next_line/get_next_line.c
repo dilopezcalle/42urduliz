@@ -32,7 +32,7 @@ char	*read_fd_buffer_size(int fd, char *str)
 	{
 		aux = ft_strjoin("", str);
 		free(str);
-		str = ft_substr(aux, 0, ft_strlen(aux));
+		str = ft_strjoin(aux, buffer);
 		free(aux);
 	}
 	free(buffer);
@@ -47,13 +47,15 @@ char	*get_next_line(int fd)
 	char		*aux;
 	static char	*str;
 
-	line = read_fd_buffer_size(fd, str);
+	aux = read_fd_buffer_size(fd, str);
+	line = ft_strjoin("", aux);
 	// Separar antes y luego de linea
-	free(str);
+	free(aux);
 	str = ft_substr(line, ft_strnl(line), ft_strlen(line));
-	aux = line;
+	aux = ft_strjoin("", line);
+	free(line);
 	line = ft_substr(aux, 0, ft_strnl(aux));
-	//printf("string: %s\n", str);
+	printf("string: %s\n", str);
 	free(str);
 	free(aux);
 	return (line);
@@ -62,11 +64,11 @@ char	*get_next_line(int fd)
 int	main(void)
 {
 	char	*line;
-	int		fd = open("./fichero", O_RDONLY);
+	int	fd = open("./fichero", O_RDONLY);
 
 	line = get_next_line(fd);
 	//printf("%d\n", ft_strnl(line));
-	//printf("Linea: %s\n", line);
+	printf("Linea: %s\n", line);
 	free(line);
 	return (0);
 }
