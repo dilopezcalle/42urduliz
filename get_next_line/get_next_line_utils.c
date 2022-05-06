@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (size);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char			*str;
 	unsigned int	size;
@@ -45,7 +45,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 		j++;
 	}
-	str[i] = '\0';
+	str[size] = '\0';
+	free(s1);
 	return (str);
 }
 
@@ -55,7 +56,7 @@ int	ft_strnl(const char *s)
 	int	find;
 
 	i = 0;
-	if ((char)s[0] == '\n')
+	if (!s || (char)s[0] == '\n')
 		return (0);
 	while (s[i] && (char)s[i] != '\n')
 	{
