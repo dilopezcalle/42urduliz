@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:53:22 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/01 15:11:03 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/07 14:31:50 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,27 @@ char	*read_fd_buffer_size(int fd, char *str, int *exit)
 
 	aux = ft_strjoin(str, "");
 	if (!fd || fd == -1)
+	{
+		free(aux);
 		return (NULL);
-	while (ft_strnl(aux) == 0 && *exit == 0)
+	}
+	while (*exit == 0 && ft_strnl(aux) == -1)
 	{
 		buffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 		if (!buffer)
-			return (NULL);
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
 		{
-			printf("hola");
+			free(buffer);
+			free(aux);
 			return (NULL);
 		}
-		else if(bytes_read != BUFFER_SIZE)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (!aux && buffer[0] != '\n' && (int)bytes_read <= 0)
+		{
+			free(buffer);
+			free(aux);
+			return (NULL);
+		}
+		if(bytes_read != BUFFER_SIZE || buffer[0] == '\n')
 			*exit = 1;
 		if (!aux)
 			aux = ft_substr(buffer, 0, BUFFER_SIZE);  
@@ -48,33 +56,48 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*aux;
 	static char	*str;
-	int		exit;
+	int			exit;
+	int			index;
 
 	exit = 0;
-	if ((str && ft_strnl(str) == 0) || !str)
-		aux = read_fd_buffer_size(fd, str, &exit);
-	else
+	if (!str || ft_strnl(str) == -1)
 	{
-		aux = ft_strjoin(str, "");
-		exit = 1;
+		aux = read_fd_buffer_size(fd, str, &exit);
+		if (!aux)
+		{
+			free(aux);
+			return (NULL);
+		}
 	}
-	str = ft_substr(aux, ft_strnl(aux), ft_strlen(aux));
-	line = ft_substr(aux, 0, ft_strnl(aux));
-	if (exit == 1)
+	else
+		aux = ft_strjoin(str, "");
+	index = ft_strnl(aux) + 1;
+	if (index == -1)
+		index = ft_strlen(aux) - 1;
+	str = ft_substr(aux, index, ft_strlen(aux));
+	line = ft_substr(aux, 0, index);
+	if (exit == 1 && str[0] == '\0')
 		free(str);
 	free(aux);
+	/*
+	if (line[0] == '\0')
+	{
+		free(line);
+		return (NULL);
+	}
+	*/
 	return (line);
 }
-
+/*
 int	main(void)
 {
 	char	*line;
-	int	fd = open("./fichero", O_RDONLY);
+	int	fd = open("./nl", O_RDONLY);
 	int	i;
 
 	i = 0;
 	
-	while (i < 2)
+	while (i < 3)
 	{
 		line = get_next_line(fd);
 		printf("Linea: %s\n", line);
@@ -83,3 +106,4 @@ int	main(void)
 	}
 	return (0);
 }
+*/

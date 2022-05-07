@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 09:20:31 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/01 12:42:01 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/07 13:57:24 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ int	ft_strnl(const char *s)
 	int	find;
 
 	i = 0;
-	if (!s || (char)s[0] == '\n')
+	if (!s || s[0] == '\0')
+		return (-1);
+	if ((char)s[0] == '\n')
 		return (0);
 	while (s[i] && (char)s[i] != '\n')
 	{
@@ -65,11 +67,11 @@ int	ft_strnl(const char *s)
 		i++;
 	}
 	if (s[i] == '\0')
-		return (0);
+		return (-1);
 	if (find == 1)
 		return (++i);
 	else
-		return (0);
+		return (-1);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -81,9 +83,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start >= ft_strlen(s) || len <= 0)
 	{
+		/*
 		str = (char *)malloc(1);
 		str[0] = '\0';
 		return (str);
+		*/
+		return (NULL);
 	}
 	index = 0;
 	if (len > ft_strlen(s))
