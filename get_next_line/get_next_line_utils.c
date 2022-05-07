@@ -6,10 +6,11 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 09:20:31 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/07 13:57:24 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/07 15:18:40 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -83,11 +84,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start >= ft_strlen(s) || len <= 0)
 	{
+
+		*/
 		/*
 		str = (char *)malloc(1);
 		str[0] = '\0';
 		return (str);
 		*/
+
+			/*
 		return (NULL);
 	}
 	index = 0;
@@ -119,4 +124,4 @@ void	*ft_calloc(size_t count, size_t size)
 		((unsigned char *)str)[i] = '\0';
 	return (str);
 }
-
+*/
