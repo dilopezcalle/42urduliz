@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:10:03 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/07 16:35:35 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/07 20:02:13 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,40 +124,30 @@ char	*get_next_line(int fd)
 {
 	static char	*str;
 	char		*aux;
-	char		*buffer;
+	char		buffer[BUFFER_SIZE + 1];
 	char		*line;
 	size_t		bytes_read;
-
+	
 	bytes_read = BUFFER_SIZE;
+	buffer[BUFFER_SIZE] = '\0';
 	aux = ft_strjoin(str, "");
 	if (!fd || fd == -1)
 		return (NULL);
-	while (bytes_read == BUFFER_SIZE && ft_strnl(aux) == -1)
+	while (bytes_read > 0 && ft_strnl(aux) == -1)
 	{
-		buffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-		if (!buffer)
-		{
-			free(buffer);
-			free(aux);
-			return (NULL);
-		}
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if ((int)bytes_read == 0 || buffer[0] == '\0')
+			return (aux);
 		if ((int)bytes_read == -1)
 		{
-			free(buffer);
 			free(aux);
 			return (NULL);
 		}
-		if (buffer[0] == '\0')
-		{
-			free(buffer);
-			return (aux);
-		}
-		if (!aux)
+		buffer[bytes_read] = '\0';
+		if (!aux && bytes_read > 0)
 			aux = ft_substr(buffer, 0, BUFFER_SIZE);
-		else
+		else if (bytes_read > 0)
 			aux = ft_strjoin(aux, buffer);
-		free(buffer);
 	}
 	line = ft_substr(aux, 0, ft_strnl(aux));
 	str = ft_substr(aux, ft_strnl(aux), ft_strlen(aux));
@@ -170,7 +160,7 @@ char	*get_next_line(int fd)
 int	main(void)
 {
 	char	*line;
-	int	fd = open("./fichero", O_RDONLY);
+	int	fd = open("./41_no_nl", O_RDONLY);
 	int	i;
 
 	i = 0;
