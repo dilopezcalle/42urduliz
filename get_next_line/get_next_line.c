@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:10:03 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/07 20:02:13 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:15:35 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
+	if ((int)len == -2)
+		len = 1;
+	if ((int) start == -2)
+		start = 1;
 	if (start >= ft_strlen(s) || len <= 0)
 		return (NULL);
 	index = 0;
@@ -131,15 +135,16 @@ char	*get_next_line(int fd)
 	bytes_read = BUFFER_SIZE;
 	buffer[BUFFER_SIZE] = '\0';
 	aux = ft_strjoin(str, "");
+	str = NULL;
 	if (!fd || fd == -1)
 		return (NULL);
 	while (bytes_read > 0 && ft_strnl(aux) == -1)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if ((int)bytes_read == 0 || buffer[0] == '\0')
-			return (aux);
-		if ((int)bytes_read == -1)
+		if ((int)bytes_read <= 0)
 		{
+			if ((int)bytes_read == 0)
+				return (aux);
 			free(aux);
 			return (NULL);
 		}
@@ -151,7 +156,7 @@ char	*get_next_line(int fd)
 	}
 	line = ft_substr(aux, 0, ft_strnl(aux));
 	str = ft_substr(aux, ft_strnl(aux), ft_strlen(aux));
-	if (bytes_read < BUFFER_SIZE)
+	if (bytes_read <= 0)
 		free(str);
 	free(aux);
 	return (line);
@@ -160,7 +165,7 @@ char	*get_next_line(int fd)
 int	main(void)
 {
 	char	*line;
-	int	fd = open("./41_no_nl", O_RDONLY);
+	int	fd = open("./multiple_nlx5", O_RDONLY);
 	int	i;
 
 	i = 0;
