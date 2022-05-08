@@ -6,12 +6,25 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 09:20:31 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/07 15:18:40 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:41:24 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "get_next_line.h"
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*str;
+	size_t	i;
+
+	i = -1;
+	str = (void *)malloc(count * size);
+	if (str == NULL)
+		return (NULL);
+	while (++i < (count * size))
+		((unsigned char *)str)[i] = '\0';
+	return (str);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -60,7 +73,7 @@ int	ft_strnl(const char *s)
 	if (!s || s[0] == '\0')
 		return (-1);
 	if ((char)s[0] == '\n')
-		return (0);
+		return (-2);
 	while (s[i] && (char)s[i] != '\n')
 	{
 		if ((char)s[i] != '\n')
@@ -82,19 +95,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
+	if ((int)len == -2)
+		len = 1;
+	if ((int) start == -2)
+		start = 1;
 	if (start >= ft_strlen(s) || len <= 0)
-	{
-
-		*/
-		/*
-		str = (char *)malloc(1);
-		str[0] = '\0';
-		return (str);
-		*/
-
-			/*
 		return (NULL);
-	}
 	index = 0;
 	if (len > ft_strlen(s))
 		len = ft_strlen(s) - start;
@@ -110,18 +116,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[index] = '\0';
 	return (str);
 }
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*str;
-	size_t	i;
-
-	i = -1;
-	str = (void *)malloc(count * size);
-	if (str == NULL)
-		return (NULL);
-	while (++i < (count * size))
-		((unsigned char *)str)[i] = '\0';
-	return (str);
-}
-*/
