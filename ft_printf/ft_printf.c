@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <unistd.h>
+
+int	ft_putchar(int c)
+{
+	return (write(1, &c, 1));
+}
 
 int	ft_printf(char const *str, ...)
 {
@@ -20,8 +26,21 @@ int	ft_printf(char const *str, ...)
 
 	i = 0;
 	va_start(vl, str);
-	s = va_arg(vl, char*);
-	printf("%s\n", s);
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			if(str[i + 1] == 'c')
+				ft_putchar(va_arg(vl, int));
+			i += 2;
+		}
+		if (str[i])
+		{
+			ft_putchar(str[i]);
+			i++;
+		}
+	}
+	va_end(vl);	
 	return (0);
 }
 
