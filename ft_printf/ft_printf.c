@@ -18,35 +18,65 @@ int	ft_putchar(int c)
 	return (write(1, &c, 1));
 }
 
-int	ft_printf(char const *str, ...)
+int	ft_putstr(char *str)
+{
+	int	bytes;
+	int	i;
+
+	
+	i = 0;
+	bytes = 0;
+	if (sizeof(str) == sizeof(char*))
+		printf("Bieeeen\n");
+	/*
+	while (str[i])
+	{
+		bytes += ft_putchar(str[i]);
+		i++;
+	}
+	*/
+	return (bytes);
+}
+
+int	ft_printf(char const *format, ...)
 {
 	int			i;
 	va_list		vl;
 	char	*s;
+	int	count_bytes;
 
 	i = 0;
-	va_start(vl, str);
-	while (str[i])
+	count_bytes = 0;
+	va_start(vl, format);
+	while (format[i])
 	{
-		if (str[i] == '%')
+		if (format[i] == '%')
 		{
-			if(str[i + 1] == 'c')
-				ft_putchar(va_arg(vl, int));
+			if(format[i + 1] == 'c')
+				count_bytes += ft_putchar(va_arg(vl, int));
+			if (format[i + 1] == 's')
+				count_bytes += ft_putstr(va_arg(vl, char*));
 			i += 2;
+
 		}
-		if (str[i])
+		else if (format[i])
 		{
-			ft_putchar(str[i]);
+			count_bytes += ft_putchar(format[i]);
 			i++;
 		}
 	}
-	va_end(vl);	
-	return (0);
+	va_end(vl);
+	return (count_bytes);
 }
 
 int	main(void)
 {
-	//printf("Org: %c\n", 'a');
-	ft_printf("Mio: %c\n", 'a');
+	int org;
+	int mio;
+
+	//org = printf("Org: %s\n", 42);
+	//printf("org: %d\n", org);
+	mio = ft_printf("Mio: %s a %s\n", "hola", 'a');
+	printf("mio: %d\n", mio);
 	return (0);
 }
