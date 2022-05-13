@@ -6,44 +6,17 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:27:10 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/08 13:30:14 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:46:24 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
-
-int	ft_putchar(int c)
-{
-	return (write(1, &c, 1));
-}
-
-int	ft_putstr(char *str)
-{
-	int	bytes;
-	int	i;
-
-	
-	i = 0;
-	bytes = 0;
-	if (sizeof(str) == sizeof(char*))
-		printf("Bieeeen\n");
-	/*
-	while (str[i])
-	{
-		bytes += ft_putchar(str[i]);
-		i++;
-	}
-	*/
-	return (bytes);
-}
 
 int	ft_printf(char const *format, ...)
 {
-	int			i;
 	va_list		vl;
-	char	*s;
-	int	count_bytes;
+	int			count_bytes;
+	int			i;
 
 	i = 0;
 	count_bytes = 0;
@@ -56,8 +29,11 @@ int	ft_printf(char const *format, ...)
 				count_bytes += ft_putchar(va_arg(vl, int));
 			if (format[i + 1] == 's')
 				count_bytes += ft_putstr(va_arg(vl, char*));
+			/*
+			if (format[i + 1] == 'p')
+				count_bytes += ft_putptr(va_arg(vl, void*));
+			*/
 			i += 2;
-
 		}
 		else if (format[i])
 		{
@@ -71,12 +47,13 @@ int	ft_printf(char const *format, ...)
 
 int	main(void)
 {
-	int org;
-	int mio;
+	char	*str = "hola";
+	int 	org;
+	int 	mio;
 
-	//org = printf("Org: %s\n", 42);
-	//printf("org: %d\n", org);
-	mio = ft_printf("Mio: %s a %s\n", "hola", 'a');
-	printf("mio: %d\n", mio);
+	org = printf("Org: %s\n", str);
+	printf("bytes: %d\n", org);
+	mio = ft_printf("Mio: %s\n", str);
+	printf("bytes: %d\n", mio);
 	return (0);
 }
