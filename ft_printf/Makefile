@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/08 12:22:53 by dilopez-          #+#    #+#              #
-#    Updated: 2022/05/13 17:01:45 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/05/14 14:03:35 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,11 @@ DIR_OBJ 			=	Objs/
 CC					=	clang
 CFLAGS				=	-Wall -Werror -Wextra
 
-SRC					=	ft_printf.c	\
+SRC					=	ft_printf.c			\
 						Utils/ft_putchar.c	\
-						Utils/ft_putstr.c		\
+						Utils/ft_putstr.c	\
 						Utils/ft_putnull.c	\
+						Utils/ft_putnbr.c	\
 
 OBJ					=	$(SRC:.c=.o)
 OBJECTS_PREFIXED 	=	$(addprefix $(DIR_OBJ), $(OBJ))
