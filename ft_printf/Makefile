@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/08 12:22:53 by dilopez-          #+#    #+#              #
-#    Updated: 2022/05/14 14:03:35 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/05/15 15:05:58 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,15 @@
 NAME				=	libftprintf.a
 DIR_OBJ 			=	Objs/
 CC					=	clang
-CFLAGS				=	-Wall -Werror -Wextra
+CFLAGS				=	-Wall -Werror -Wextra -g
 
-SRC					=	ft_printf.c			\
-						Utils/ft_putchar.c	\
-						Utils/ft_putstr.c	\
-						Utils/ft_putnull.c	\
-						Utils/ft_putnbr.c	\
+SRC					=	ft_printf.c				\
+						Utils/ft_putchar.c		\
+						Utils/ft_putstr.c		\
+						Utils/ft_putnull.c		\
+						Utils/ft_putnbr.c		\
+						Utils/ft_putunsigned.c	\
+						Utils/ft_putptr.c		\
 
 OBJ					=	$(SRC:.c=.o)
 OBJECTS_PREFIXED 	=	$(addprefix $(DIR_OBJ), $(OBJ))
