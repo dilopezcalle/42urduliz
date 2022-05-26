@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 10:37:57 by dilopez-          #+#    #+#              #
-#    Updated: 2022/05/22 12:25:07 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/05/26 15:49:20 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ CFLAGS			=	-Wall -Werror -Wextra -g
 SRCS			=	push_swap.c				\
 					srcs/ft_get_int_list.c	\
 					srcs/ft_exit_program.c	\
+					srcs/ft_swap.c			\
+					srcs/ft_push.c			\
 					srcs/libft/ft_strlen.c	\
 					srcs/libft/ft_memset.c	\
 					srcs/libft/ft_calloc.c	\

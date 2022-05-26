@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 10:47:48 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/22 16:07:27 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:20:38 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,18 @@ typedef struct s_list
 void	ft_exit_program(t_list *stack_a, t_list *stack_b, int error);
 
 // ft_get_int_list
-int		ft_get_int_list(char *argv[]);
+t_list	*ft_get_int_list(char *argv[]);
+int		ft_check_alpha(char *str);
 int		ft_add_list(t_list *stack_a, char *str, int index);
+
+// swap
+void	sa(t_list **stack_a);
+void	sb(t_list **stack_b);
+void	ss(t_list **stack_a, t_list **stack_b);
+
+// push
+void	pb(t_list **stack_a, t_list **stack_b);
+void	pa(t_list **stack_a, t_list **stack_b);
 
 // ========== Libft functions ==========
 
