@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 10:37:57 by dilopez-          #+#    #+#              #
-#    Updated: 2022/05/26 15:49:20 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/05/29 12:11:13 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,21 @@ DIR_OBJS 		=	objs/
 CC				=	clang
 CFLAGS			=	-Wall -Werror -Wextra -g
 
-SRCS			=	push_swap.c				\
-					srcs/ft_get_int_list.c	\
-					srcs/ft_exit_program.c	\
-					srcs/ft_swap.c			\
-					srcs/ft_push.c			\
-					srcs/libft/ft_strlen.c	\
-					srcs/libft/ft_memset.c	\
-					srcs/libft/ft_calloc.c	\
-					srcs/libft/ft_substr.c	\
-					srcs/libft/ft_split.c	\
-					srcs/libft/ft_atoi.c	\
+SRCS			=	push_swap.c					\
+					srcs/ft_get_int_list.c		\
+					srcs/ft_issorted.c			\
+					srcs/ft_exit_program.c		\
+					srcs/ft_swap.c				\
+					srcs/ft_push.c				\
+					srcs/ft_rotate.c			\
+					srcs/ft_reverse_rotate.c	\
+					srcs/libft/ft_strlen.c		\
+					srcs/libft/ft_memset.c		\
+					srcs/libft/ft_calloc.c		\
+					srcs/libft/ft_substr.c		\
+					srcs/libft/ft_split.c		\
+					srcs/libft/ft_atoi.c		\
+					srcs/ft_sort_3.c			\
 
 OBJS			=	$(SRCS:.c=.o)
 OBJS_PREFIXED	=	$(addprefix $(DIR_OBJS), $(OBJS))
