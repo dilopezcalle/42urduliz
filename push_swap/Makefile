@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 10:37:57 by dilopez-          #+#    #+#              #
-#    Updated: 2022/05/29 12:11:13 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/05/31 16:41:13 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS			=	-Wall -Werror -Wextra -g
 
 SRCS			=	push_swap.c					\
 					srcs/ft_get_int_list.c		\
-					srcs/ft_issorted.c			\
+					srcs/ft_push_swap_utils.c	\
 					srcs/ft_exit_program.c		\
 					srcs/ft_swap.c				\
 					srcs/ft_push.c				\
@@ -31,6 +31,8 @@ SRCS			=	push_swap.c					\
 					srcs/libft/ft_split.c		\
 					srcs/libft/ft_atoi.c		\
 					srcs/ft_sort_3.c			\
+					srcs/ft_sort_5.c			\
+					srcs/ft_algorithm.c			\
 
 OBJS			=	$(SRCS:.c=.o)
 OBJS_PREFIXED	=	$(addprefix $(DIR_OBJS), $(OBJS))

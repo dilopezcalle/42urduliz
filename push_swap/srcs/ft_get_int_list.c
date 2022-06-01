@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 11:11:15 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/29 17:47:48 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/05/31 12:16:18 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,26 @@ int	ft_check_alpha(char *str)
 
 int	ft_add_list(t_list *stack_a, char *str, int index)
 {
-	int		num;
-	t_list	*new;
+	long int		num;
+	t_list			*new;
 
 	num = ft_atoi(str);
+	if (num < -2147483648 || num > 2147483647)
+		return (1);
 	if (stack_a->number == num && index != 0)
 		return (1);
 	new = ft_calloc(1, sizeof(t_list));
 	if (!new)
 		return (1);
 	new->number = num;
+	new->index = -1;
 	new->next = 0;
 	if (ft_check_repeat(&stack_a, new, num) == 1)
 		return (1);
 	if (index == 0)
 	{
 		stack_a->number = new->number;
+		stack_a->index = new->index;
 		free(new);
 	}
 	else

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/01 10:22:11 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/01 12:40:49 by dilopez-         ###   ########.fr       */
+/*   Created: 2022/05/29 09:32:34 by dilopez-          #+#    #+#             */
+/*   Updated: 2022/06/01 08:57:56 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,40 @@
 
 void	ft_algorithm(t_list **stack_a, t_list **stack_b, int size)
 {
-	int	num_bits;
-	int	position;
-	int	loop_size;
-
-	num_bits = ft_get_bits(size);
-	position = 0;
-	while (position < num_bits)
-	{
-		loop_size = size;
-		while (--loop_size >= 0)
-		{
-			if (((*stack_a)->index >> position) & 1)
-				ra(stack_a);
-			else
-				pb(stack_a, stack_b);
-		}
-		while (*stack_b)
-			pa(stack_a, stack_b);
-		position++;
-	}
-}
-
-int	ft_get_bits(int size)
-{
-	int	i;
+	int		i;
+	int		j;
+	int		half;
+	t_list	*begin;
 
 	i = 0;
-	size--;
+	j = 0;
 	while (size > 0)
 	{
-		size = size / 2;
-		i++;
+		begin = *stack_a;
+		half = size / 2;
+		size--;
+		while ((*stack_a)->index != j)
+		{
+			*stack_a = (*stack_a)->next;
+			i++;
+		}
+		*stack_a = begin;
+		if (i <= half)
+			while (i > 0)
+			{
+				ra(stack_a);
+				i--;
+			}
+		else
+			while (i <= size)
+			{
+				rra(stack_a);
+				i++;
+			}
+		j++;
+		i = 0;
+		pb(stack_a, stack_b);
 	}
-	return (i);
+	while (*stack_b)
+		pa(stack_a, stack_b);
 }
