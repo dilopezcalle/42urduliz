@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 11:11:15 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/31 12:16:18 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:57:13 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_check_alpha(char *str)
 
 	i = 0;
 	invalid = 0;
-	if (str[0] == '-')
+	if (str[0] == '-' && str[1])
 		i++;
 	while (str[i] && invalid == 0)
 	{

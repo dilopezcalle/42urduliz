@@ -6,7 +6,7 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:18:14 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/31 16:06:13 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:39:01 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	ft_sort_5(t_list **stack_a, t_list **stack_b)
 	pb(stack_a, stack_b);
 	if ((*stack_b)->index < ((*stack_b)->next)->index)
 		sb(stack_b);
-	ft_sort_3(stack_a);
+	if (ft_issorted(stack_a) == 0)
+		ft_sort_3(stack_a);
 	pa(stack_a, stack_b);
 	pa(stack_a, stack_b);
 	ra(stack_a);

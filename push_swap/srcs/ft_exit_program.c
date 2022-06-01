@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 11:15:18 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/05/29 09:22:11 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:54:42 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	ft_exit_program(t_list *stack_a, t_list *stack_b, int status)
 		free(aux);
 	}
 	if (status == 2)
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 	exit(status);
 }
