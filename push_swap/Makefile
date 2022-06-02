@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 10:37:57 by dilopez-          #+#    #+#              #
-#    Updated: 2022/05/31 16:41:13 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/06/02 10:22:57 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ fclean: clean
 
 re: fclean all
 
-out: all
-	gcc -g $(CFLAGS) push_swap.a -o push_swap
+#out: all
+#	gcc -g $(CFLAGS) push_swap.a -o push_swap
 
-.PHONY: all clean fclean re out
+.PHONY: all clean fclean re
