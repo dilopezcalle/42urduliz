@@ -6,7 +6,7 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 10:58:05 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/02 10:10:11 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/04 12:43:29 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_push_swap(t_list *stack_a, t_list *stack_b, char **argv)
 	else
 		ft_algorithm(&stack_a, &stack_b, size);
 	ft_exit_program(stack_a, stack_b, 0);
+//	ft_print_result(stack_a, stack_b);
 }
 
 int	main(int argc, char *argv[])
