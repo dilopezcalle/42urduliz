@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 10:37:57 by dilopez-          #+#    #+#              #
-#    Updated: 2022/06/05 12:19:47 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/06/11 11:27:35 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,20 @@
 NAME			=	pipex
 DIR_OBJS 		=	objs/
 CC				=	clang
-CFLAGS			=	-Wall -Werror -Wextra -g
+CFLAGS			=	-g
 
 SRCS			=	pipex.c					\
+					srcs/ft_pipex_utils.c	\
+					srcs/ft_create_list.c	\
+					srcs/ft_create_pipe.c	\
+					srcs/libft/ft_strlen.c	\
+					srcs/libft/ft_strchr.c	\
+					srcs/libft/ft_memset.c	\
+					srcs/libft/ft_calloc.c	\
+					srcs/libft/ft_substr.c	\
+					srcs/libft/ft_split.c	\
+					srcs/libft/ft_strncmp.c	\
+					srcs/libft/ft_strjoin.c	\
 
 OBJS			=	$(SRCS:.c=.o)
 OBJS_PREFIXED	=	$(addprefix $(DIR_OBJS), $(OBJS))

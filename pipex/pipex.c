@@ -6,70 +6,76 @@
 /*   By: dilopez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 12:19:57 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/09 09:26:28 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/12 10:42:04 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pipex.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <stdlib.h> // exit
-/*
-void	ft_pipex(argv, envp)
-{
-	
-}
-*/
 int	main(int argc, char *argv[], char *envp[])
 {
-	int		fd[2];
-	int		pid;
-	int		file;
-	int		out;
-	int		stt;
-	char	*buff = calloc(100, 1);
-	char	*array[] = {"ls", "-l", 0};
-	char	*array2[] = {"wc", "-l", 0};
-
-	pipe(fd);
-	pid = fork();
-	printf("fd[0]: %d\n", fd[0]);
-	printf("fd[1]: %d\n", fd[1]);
-
-	if (!pid)
-	{
-		// hijo
-		printf("Entra al hijo\n");
-		
-		file = open("infile", O_RDONLY);
-
-		dup2(fd[1], 1);
-		close(fd[0]);
-		dup2(file, 0);
-		
-		close(fd[1]);
-		close(file);
-		execve("/bin/ls", array, envp);
-	}
+	if (argc >= 5)
+		ft_pipex(argc - 1, argv + 1, envp);
 	else
-	{
-		// padre
-		printf("Entra al padre\n");
-		waitpid(pid, NULL, 0);
-		printf("Espera al hijo\n");
-
-		out = open("outfile", O_WRONLY);
-		close(fd[1]);
-		dup2(fd[0], 0);
-		dup2(out, 1);
-
-		close(fd[0]);
-		execve("/usr/bin/wc", array2, envp);
-
-		exit(0);
-	}
-	free(buff);
+		ft_exit_program(0, 22);
 	return 0;
+}
+
+void	ft_pipex(int argc, char *argv[], char *envp[])
+{
+	t_data	*command_list;
+	char	**paths;
+	int		status;
+	int		i;
+
+	paths = ft_get_paths(envp);
+	command_list = ft_create_list(argc, argv, paths);
+	status = ft_check_list(argc, argv, command_list) != 0;
+	if (status != 0)
+		ft_exit_program(command_list, status);
+	ft_create_pipe(command_list, argv, argc, envp);
+	ft_exit_program(command_list, 0);
+}
+
+void	ft_exit_program(t_data *command_list, int status)
+{
+	t_data	*aux;
+	int		i;
+
+	while (command_list)
+	{
+		i = -1;
+		aux = command_list;
+		command_list = command_list->next;
+		free(aux->path);
+		while ((aux->flags)[++i])
+			free((aux->flags)[i]);
+		free(aux->flags);
+		free(aux);
+	}
+	if (status)
+	{
+		errno = status;
+		perror("Error");
+	}
+	exit(status);
+}
+
+void	ft_print_list(t_data *command_list)
+{
+	int	i;
+
+	while (command_list)
+	{
+		i = 0;
+		printf("%s\n", command_list->path);
+		/*
+		while ((command_list->flags)[i])
+		{
+			printf("%s\n", (command_list->flags)[i]);
+			i++;
+		}
+		*/
+		command_list = command_list->next;
+	}
 }
