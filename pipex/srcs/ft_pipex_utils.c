@@ -6,11 +6,51 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 08:01:25 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/12 09:21:35 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/15 12:49:02 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+#include <fcntl.h>
+#include <unistd.h>
+//#include <sys/types.h>
+//#include <sys/uio.h>
+
+int	ft_check_infile(char *argv[])
+{
+	int	fd;
+
+	fd = open(argv[0], O_RDONLY);
+	if (fd < 0)
+	{
+		if (access(argv[0], F_OK) != 0)
+		{
+			ft_print_perror(argv[0], 2);
+			exit(0);
+		}
+		else
+		{
+			ft_print_perror(argv[0], 13);
+			exit(2);
+		}
+	}
+	close(fd);
+	return (0);
+}
+
+int	ft_check_outfile(int argc, char *argv[])
+{
+	int	fd;
+
+	fd = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (fd < 0)
+	{
+		ft_print_perror(argv[argc - 1], 13);
+		exit(2);
+	}
+	close(fd);
+	return (0);
+}
 
 char	**ft_get_paths(char *envp[])
 {
@@ -27,21 +67,7 @@ char	**ft_get_paths(char *envp[])
 int	ft_check_list(int argc, char *argv[], t_data *command_list)
 {
 	int	i;
-	int	fd;
 
-	fd = open(argv[0], O_RDONLY);
-	if (fd < 0)
-	{
-		if (access(argv[0], F_OK) != 0)
-			return (2);
-		else
-			return (13);
-	}
-	close(fd);
-	fd = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0777);
-	if (fd < 0)
-		return (13);
-	close(fd);
 	i = 1;
 	while (i < argc - 1)
 	{

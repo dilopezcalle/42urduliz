@@ -16,7 +16,7 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	if (argc == 5)
+	if (argc >= 5)
 		ft_pipex(argc - 1, argv + 1, envp);
 	else
 	{

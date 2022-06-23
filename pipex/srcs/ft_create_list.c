@@ -6,11 +6,12 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 09:42:27 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/12 09:08:25 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/18 15:18:01 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+#include <unistd.h>
 
 t_data	*ft_create_list(int argc, char *argv[], char **paths)
 {
@@ -58,8 +59,6 @@ char	*ft_get_command_path(char *command, char **paths)
 		free(command_path);
 		i++;
 	}
-	if (!path)
-		errno = 13;
 	return (path);
 }
 
@@ -75,5 +74,5 @@ void	ft_lstadd(t_data **lst, t_data *new)
 	last_list = *lst;
 	while (last_list->next != NULL)
 		last_list = last_list->next;
-	last_list->next = new;	
+	last_list->next = new;
 }

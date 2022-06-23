@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 10:37:57 by dilopez-          #+#    #+#              #
-#    Updated: 2022/06/11 11:27:35 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/06/12 11:21:18 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 NAME			=	pipex
 DIR_OBJS 		=	objs/
 CC				=	clang
-CFLAGS			=	-g
+CFLAGS			=	-Wall -Werror -Wextra
+
 
 SRCS			=	pipex.c					\
 					srcs/ft_pipex_utils.c	\
@@ -29,8 +30,23 @@ SRCS			=	pipex.c					\
 					srcs/libft/ft_strncmp.c	\
 					srcs/libft/ft_strjoin.c	\
 
+SRCS_BONUS		=	pipex_bonus.c			\
+					srcs/ft_pipex_utils.c	\
+					srcs/ft_create_list.c	\
+					srcs/ft_create_pipe.c	\
+					srcs/libft/ft_strlen.c	\
+					srcs/libft/ft_strchr.c	\
+					srcs/libft/ft_memset.c	\
+					srcs/libft/ft_calloc.c	\
+					srcs/libft/ft_substr.c	\
+					srcs/libft/ft_split.c	\
+					srcs/libft/ft_strncmp.c	\
+					srcs/libft/ft_strjoin.c	\
+
 OBJS			=	$(SRCS:.c=.o)
-OBJS_PREFIXED	=	$(addprefix $(DIR_OBJS), $(OBJS))
+PREFIXED		=	$(addprefix $(DIR_OBJS), $(OBJS))
+OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)
+PREFIXED_BONUS	=	$(addprefix $(DIR_OBJS), $(OBJS_BONUS))
 
 ifneq (,$(findstring xterm,${TERM}))
 	GREEN := $(shell tput -Txterm setaf 2)
@@ -47,8 +63,8 @@ $(DIR_OBJS)%.o : %.c pipex.h
 	@echo "Compiling with $(CC) $(CFLAGS):\t $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME) : $(OBJS_PREFIXED)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS_PREFIXED)
+$(NAME) : $(PREFIXED)
+	@$(CC) $(CFLAGS) -o $(NAME) $(PREFIXED)
 	@echo "${GREEN}Mandatory part compiled!${RESET}"
 
 # ========== FUNCTIONS ==========
@@ -60,8 +76,12 @@ clean:
 	@echo "${GREEN}Cleaned!${RESET}"
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
+
+bonus: $(PREFIXED_BONUS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(PREFIXED_BONUS)
+	@echo "${GREEN}Bonus part compiled!${RESET}"
 
 .PHONY: all clean fclean re
