@@ -13,8 +13,6 @@
 #include "../pipex.h"
 #include <fcntl.h>
 #include <unistd.h>
-//#include <sys/types.h>
-//#include <sys/uio.h>
 
 int	ft_check_infile(char *argv[])
 {
@@ -26,7 +24,7 @@ int	ft_check_infile(char *argv[])
 		if (access(argv[0], F_OK) != 0)
 		{
 			ft_print_perror(argv[0], 2);
-			exit(0);
+			exit(2);
 		}
 		else
 		{
@@ -45,7 +43,11 @@ int	ft_check_outfile(int argc, char *argv[])
 	fd = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
 	{
-		ft_print_perror(argv[argc - 1], 13);
+		if (access(argv[argc - 1], F_OK) == 0)
+		{
+			ft_print_perror(argv[argc - 1], 13);
+			exit(2);
+		}
 		exit(2);
 	}
 	close(fd);
@@ -64,7 +66,7 @@ char	**ft_get_paths(char *envp[])
 	return (paths);
 }
 
-int	ft_check_list(int argc, char *argv[], t_data *command_list)
+int	ft_check_list(int argc, t_data *command_list)
 {
 	int	i;
 
@@ -72,13 +74,9 @@ int	ft_check_list(int argc, char *argv[], t_data *command_list)
 	while (i < argc - 1)
 	{
 		if (!command_list->path)
-			return (1);
+			return (3);
 		command_list = command_list->next;
 		i++;
 	}
-	if (access(argv[0], R_OK) != 0)
-		return (1);
-	if (access(argv[argc - 1], W_OK))
-		return (1);
 	return (0);
 }

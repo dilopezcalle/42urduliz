@@ -12,6 +12,7 @@
 
 #include "../pipex.h"
 #include <unistd.h>
+#include <stdio.h>
 
 t_data	*ft_create_list(int argc, char *argv[], char **paths)
 {

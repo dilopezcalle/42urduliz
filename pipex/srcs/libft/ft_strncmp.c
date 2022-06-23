@@ -32,15 +32,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (-1);
 	return (0);
 }
-/*
-int	main(void)
-{
-	char	s1[] = "\x12\xff\x65\x12\xbd\xde\xad";
-	char	s2[] = "\x12\x02";
-	size_t	n = 6;
-
-	printf("Original function: %d\n", strncmp(s1, s2, n));
-	printf("My function: %d\n", ft_strncmp(s1, s2, n));
-	return (0);
-}
-*/

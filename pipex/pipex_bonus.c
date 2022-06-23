@@ -36,7 +36,7 @@ void	ft_pipex(int argc, char *argv[], char *envp[])
 		exit(0);
 	paths = ft_get_paths(envp);
 	command_list = ft_create_list(argc, argv, paths);
-	status = ft_check_list(argc, argv, command_list);
+	status = ft_check_list(argc, command_list);
 	if (status != 0)
 	{
 		ft_print_perror("access", status);

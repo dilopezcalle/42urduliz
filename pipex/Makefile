@@ -13,7 +13,7 @@
 # ========== VARIABLES ==========
 NAME			=	pipex
 DIR_OBJS 		=	objs/
-CC				=	clang
+CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra
 
 

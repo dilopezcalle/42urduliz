@@ -32,7 +32,7 @@ void	ft_print_list(t_data *command_list);
 int		ft_check_infile(char *argv[]);
 int		ft_check_outfile(int argc, char *argv[]);
 char	**ft_get_paths(char **paths);
-int		ft_check_list(int argc, char *argv[], t_data *command_list);
+int		ft_check_list(int argc, t_data *command_list);
 
 // create_list
 t_data	*ft_create_list(int argc, char *argv[], char **paths);
