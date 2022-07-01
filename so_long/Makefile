@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/25 12:54:12 by dilopez-          #+#    #+#              #
-#    Updated: 2022/06/27 16:17:28 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/06/28 09:31:31 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ LINKS			=	-L . -lmlx -framework OpenGL -framework AppKit
 
 SRCS			=	so_long.c									\
 					srcs/ft_map.c								\
+					srcs/ft_sprite.c							\
+					srcs/ft_hook.c								\
 					srcs/libft/ft_memset.c						\
 					srcs/libft/ft_split.c						\
 					srcs/get_next_line/get_next_line.c			\

@@ -6,19 +6,19 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 18:01:28 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/27 08:32:10 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/06/30 09:32:03 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_get_map(t_map **map, char *ber)
+void	ft_get_map(t_program *program, char *ber)
 {
 	char	*str_map;
 	char	*line;
 	int		fd;
 
-	*map = ft_calloc(1, sizeof(t_map));
+	program->map = ft_calloc(1, sizeof(t_map));
 	fd = open(ber, O_RDONLY);
 	line = get_next_line(fd);
 	str_map = 0;
@@ -30,25 +30,25 @@ void	ft_get_map(t_map **map, char *ber)
 		free(line);
 		line = get_next_line(fd);
 	}
-	(*map)->ber = ft_split(str_map, '\n');
-	if (!str_map || ft_check_map(map))
+	(program->map)->ber = ft_split(str_map, '\n');
+	if (!str_map || ft_check_map(program))
 	{
 		if (str_map)
-			ft_free_map(map);
+			ft_free_map(&program->map);
 		free(str_map);
 		ft_exit_program_error("Error: Wrong map");
 	}
 	free(str_map);
 }
 
-int	ft_check_map(t_map **map)
+int	ft_check_map(t_program *program)
 {
 	int		height;
 	int		pos_row;
 	char	**str_map;
 
-	(*map)->width = ft_strlen(((*map)->ber)[0]);
-	str_map = (*map)->ber;
+	(program->map)->width = ft_strlen(((program->map)->ber)[0]);
+	str_map = (program->map)->ber;
 	height = -1;
 	while (str_map[++height])
 	{
@@ -58,12 +58,12 @@ int	ft_check_map(t_map **map)
 			pos_row = 1;
 		else
 			pos_row = 2;
-		if (ft_check_chars_map(str_map[height], (*map)->width, pos_row))
+		if (ft_check_chars_map(str_map[height], (program->map)->width, pos_row))
 			return (1);
 	}
 	if (height < 3)
 		return (1);
-	(*map)->height = height;
+	(program->map)->height = height;
 	return (0);
 }
 
