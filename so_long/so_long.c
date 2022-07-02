@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:54:41 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/01 17:28:57 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/02 11:08:04 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	ft_so_long(char *argv)
 
 	ft_get_map(&program, argv);
 	program.mlx = mlx_init();
-	program.window.reference = mlx_new_window(program.mlx, program.map->width
-			* 64, program.map->height * 64, "so_long");
+	program.window.reference = mlx_new_window(program.mlx, \
+		program.map->width * 64, program.map->height * 64, "so_long");
 	program.window.size.x = program.map->width * 64;
 	program.window.size.y = program.map->height * 64;
-	mlx_hook(program.window.reference, 17, 0, ft_exit_program, 0);
+	mlx_hook(program.window.reference, 17, 0, ft_exit_program, &program);
 	ft_put_sprites(&program);
 	mlx_key_hook(program.window.reference, *ft_press_key, &program);
 	mlx_loop(program.mlx);
@@ -54,8 +54,12 @@ void	ft_exit_program_error(char *str)
 	exit(2);
 }
 
-//ft_free_map(map);
-int	ft_exit_program(void)
+//
+int	ft_exit_program(void *param)
 {
+	t_program *program;
+
+	program = (t_program *)param;
+	ft_free_map(&program->map);
 	exit(0);
 }

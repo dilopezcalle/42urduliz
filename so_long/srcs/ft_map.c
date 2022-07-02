@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 18:01:28 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/30 09:32:03 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/02 11:01:51 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,20 @@ void	ft_free_map(t_map **map)
 	int	i;
 
 	i = 0;
+	while (((*map)->ber)[i])
+	{
+		free(((*map)->ber)[i]);
+		i++;
+	}
+	free((*map)->ber);
+	free(*map);
+}
+/*
+void	ft_free_map(t_map **map)
+{
+	int	i;
+
+	i = 0;
 	printf("\nWidth: %d\tHeight: %d\n", (*map)->width, (*map)->height);
 	printf("\nMap's lines:\n");
 	while (((*map)->ber)[i])
@@ -111,3 +125,4 @@ void	ft_free_map(t_map **map)
 	free((*map)->ber);
 	free(*map);
 }
+*/
