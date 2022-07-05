@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:49:54 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/06/25 18:47:22 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:29:35 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,3 @@ char	**ft_split(char const *s, char c)
 	bi_str[i] = NULL;
 	return (bi_str);
 }
-/*
-int	main(void)
-{
-	char	**bi_str;
-
-	bi_str = ft_split("hello!", ' ');
-	printf("String: %s \n", bi_str[2]);
-	free(bi_str);
-	return (0);
-}
-*/

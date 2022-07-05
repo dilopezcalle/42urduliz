@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:54:41 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/05 14:16:05 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:13:03 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 #include <sys/errno.h>
 #include <stdio.h>
 
@@ -34,12 +34,13 @@ void	ft_so_long(char *argv)
 	ft_get_map(&program, argv);
 	program.mlx = mlx_init();
 	program.window.reference = mlx_new_window(program.mlx, \
-		program.map->width * 64, program.map->height * 64, "so_long");
+		program.map->width * 64, program.map->height * 64, "so_long_bonus");
 	program.window.size.x = program.map->width * 64;
 	program.window.size.y = program.map->height * 64;
 	mlx_hook(program.window.reference, 17, 0, ft_exit_program, &program);
 	ft_put_sprites(&program);
 	mlx_key_hook(program.window.reference, *ft_press_key, &program);
+	mlx_loop_hook(program.mlx, *ft_update_sprites, &program);
 	mlx_loop(program.mlx);
 	ft_free_map(&program.map);
 }

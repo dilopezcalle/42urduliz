@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:54:22 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/05 14:12:08 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:23:04 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "srcs/get_next_line/get_next_line.h"
 # include "minilibx/mlx.h"
@@ -38,12 +38,13 @@ typedef struct s_window
 
 typedef struct s_sprite
 {
-	void		*reference;
-	char		*pixels;
-	int			bits_per_pixel;
-	int			line_size;
-	int			endian;
-	t_position	size;
+	void			*reference;
+	char			*pixels;
+	int				bits_per_pixel;
+	int				line_size;
+	int				endian;
+	t_position		size;
+	struct s_sprite	*next;
 }				t_sprite;
 
 typedef struct s_program
@@ -55,6 +56,7 @@ typedef struct s_program
 	t_sprite	floor;
 	t_sprite	coin;
 	t_sprite	exit;
+	t_sprite	thorn;
 	t_sprite	sprite;
 	t_position	sprite_position;
 	int			movements;
@@ -83,10 +85,21 @@ void			ft_put_chars_sprites(t_program *program, int x, int y);
 int				ft_press_key(int key, void *param);
 void			ft_upgrade_sprites(t_program *program, int x, int y);
 
+// ========== bonus ==========
+int				ft_put_str_to_window(t_program *program);
+void			ft_check_death_or_win(t_program *program);
+int				ft_update_sprites(void *param);
+void			ft_update_coins(t_program *program);
+t_sprite		ft_create_coin_sprite(t_program *program, int num_sprite);
+t_sprite		ft_create_coin_sprite_2(t_program *program, int num_sprite);
+void			ft_put_coin_sprite(t_program *program, t_sprite coin_sprite,
+					int num_sprite, int y);
+
 // ========== libft ==========
 void			*ft_memset(void *b, int c, size_t len);
 char			**ft_split(char const *s, char c);
 char			*ft_split_check_chars(char const *s, char c, int row);
 int				ft_split_check_rows(char const *s, char c);
+char			*ft_itoa(int n);
 
 #endif

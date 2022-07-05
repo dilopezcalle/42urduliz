@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 18:01:28 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/02 11:01:51 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:15:25 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	ft_check_chars_map(char *row, int width, int pos_row)
 			return (1);
 		else if ((width_loop == 0 || width_loop == width - 1) && c != '1')
 			return (1);
-		if (c != '1' && c != '0' && c != 'P' && c != 'C' && c != 'E')
+		if (c != '1' && c != '0' && c != 'P' && c != 'C' && c != 'E'
+			&& c != 'T')
 			return (1);
 		if (c == 'P')
 			double_char++;
@@ -108,21 +109,3 @@ void	ft_free_map(t_map **map)
 	free((*map)->ber);
 	free(*map);
 }
-/*
-void	ft_free_map(t_map **map)
-{
-	int	i;
-
-	i = 0;
-	printf("\nWidth: %d\tHeight: %d\n", (*map)->width, (*map)->height);
-	printf("\nMap's lines:\n");
-	while (((*map)->ber)[i])
-	{
-		printf("%s\n", (((*map)->ber)[i]));
-		free(((*map)->ber)[i]);
-		i++;
-	}
-	free((*map)->ber);
-	free(*map);
-}
-*/
