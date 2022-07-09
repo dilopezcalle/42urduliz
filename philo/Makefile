@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/25 12:54:12 by dilopez-          #+#    #+#              #
-#    Updated: 2022/07/08 18:22:22 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/07/09 08:51:24 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,13 @@
 NAME			=	philo
 DIR_OBJS 		=	objs/
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -g
+CFLAGS			=	-Wall -Werror -Wextra
 
 SRCS			=	philo.c									\
 					srcs/philo_utils.c						\
 					srcs/ft_get_args.c						\
 					srcs/ft_get_philos.c					\
+					srcs/ft_philo_states.c					\
 
 OBJS			=	$(SRCS:.c=.o)
 PREFIXED		=	$(addprefix $(DIR_OBJS), $(OBJS))
@@ -48,7 +49,7 @@ print:
 all: $(NAME)
 
 clean:
-	@rm -rf $(OBJS) $(DIR_OBJS) philo.a.dSYM
+	@rm -rf $(OBJS) $(DIR_OBJS) philo.dSYM
 	@echo "\n${GREEN}------------------ Cleaned! ------------------${RESET}\n"
 
 fclean: clean

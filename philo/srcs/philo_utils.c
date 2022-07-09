@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:00:35 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/08 16:47:33 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/09 10:02:07 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 long	ft_timecomp(struct timeval timer);
 
-void	ft_usleep(long milisecons)
+void	ft_msleep(long milisecons)
 {
 	struct timeval	timer;
 
