@@ -6,13 +6,15 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 08:47:47 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/09 15:11:00 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/10 17:01:05 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+#include <unistd.h>
+#include <stdlib.h>
 
-static int	ft_take_fork(t_philo *philo);
+static int	ft_take_fork(t_philo *philo, t_data *data);
 
 void	*ft_philo_states(void *param)
 {
@@ -20,65 +22,82 @@ void	*ft_philo_states(void *param)
 	t_philo	*aux;
 	
 	data = (t_data *)param;
-	pthread_mutex_lock(&data->mutex2);
 	aux = data->lst_philo;
-	pthread_mutex_unlock(&data->mutex2);
-	while (1)
+	// pthread_mutex_lock(&data->mutex);
+	// pthread_mutex_unlock(&data->mutex);
+	while (1) // Cambiar a mientras que el philo siga vivo
 	{
-		if (ft_take_fork(aux))
+		if (ft_take_fork(aux, data))
 		{
-			printf("Philo (%p) con id %d can eat\n", aux, (aux)->id);
-			ft_msleep(data->time_eat);
-			printf("forks: %d\n", aux->forks);
-			while (aux->forks > 0)
-			{
-				if (aux->fork == 0 && aux->forks > 0)
-				{
-					printf("philo %d deja el fork\n", aux->id);
-					aux->fork = 1;
-					(aux->forks)--;
-				}
-				if ((aux->right)->fork == 0 && aux->forks > 0)
-				{
-					printf("philo %d deja el fork derecha\n", aux->id);
-					(aux->right)->fork = 1;
-					(aux->forks)--;
-				}
-				if ((aux->left)->fork == 0 && aux->forks > 0)
-				{
-					printf("philo %d deja el fork izquierda\n", aux->id);
-					(aux->right)->fork = 1;
-					(aux->forks)--;
-				}
-			}
+			aux->last_eat = 0;
+			printf("%ld %d is eating\n", ft_timecomp(data->init_time), aux->id);
+			ft_msleep(data->time_eat, aux, data);
+			*aux->taken_fork_1 = 1;
+			*aux->taken_fork_2 = 1;
+			aux->num_forks = 0;
+			printf("%ld %d is sleeping\n", ft_timecomp(data->init_time), aux->id);
+			ft_msleep(data->time_sleep, aux, data);
+			aux->last_eat -= data->time_sleep;
+			printf("%ld %d is thinking\n", ft_timecomp(data->init_time), aux->id);
 		}
 	}
 	return (0);
 }
 
-static int	ft_take_fork(t_philo *philo)
+static int	ft_take_fork(t_philo *philo, t_data *data)
 {
-	philo->forks = 0;
-	while (philo->forks < 2)
+	while (philo->num_forks < 2)
 	{
-		if (philo->fork && philo->forks < 2)
+		//pthread_mutex_lock(&data->mutex);
+		if (ft_timecomp(data->init_time) - philo->last_eat > data->time_die)
 		{
-			printf("Philo %d taken his fork\n", philo->id);
+			printf("\n%ld PHILO %d DIED\n\n", ft_timecomp(data->init_time), philo->id);
+			exit (0);
+		}
+		if (philo->num_forks < 2 && philo->fork)
+		{
+			printf("%ld %d has taken a fork\n", ft_timecomp(data->init_time), philo->id);
 			philo->fork = 0;
-			(philo->forks)++;
+			if (!philo->taken_fork_1)
+				philo->taken_fork_1 = &philo->fork;
+			else
+				philo->taken_fork_2 = &philo->fork;
+			(philo->num_forks)++;
 		}
-		if ((philo->right)->fork && philo->forks < 2)
+		if (philo->num_forks < 2 && (philo->right)->fork)
 		{
-			printf("Philo %d taken the right fork\n", philo->id);
+			printf("%ld %d has taken a fork\n", ft_timecomp(data->init_time), philo->id);
 			(philo->right)->fork = 0;
-			(philo->forks)++;
+			if (!philo->taken_fork_1)
+				philo->taken_fork_1 = &(philo->right)->fork;
+			else
+				philo->taken_fork_2 = &(philo->right)->fork;
+			(philo->num_forks)++;
 		}
-		if ((philo->right)->fork && philo->forks < 2)
+		if (philo->num_forks < 2 && (philo->left)->fork)
 		{
-			printf("Philo %d taken the left fork\n", philo->id);
+			printf("%ld %d has taken a fork\n", ft_timecomp(data->init_time), philo->id);
 			(philo->left)->fork = 0;
-			(philo->forks)++;
+			if (!philo->taken_fork_1)
+				philo->taken_fork_1 = &(philo->left)->fork;
+			else
+				philo->taken_fork_2 = &(philo->left)->fork;
+			(philo->num_forks)++;
 		}
+		/*
+		if (philo->num_forks < 2)
+		{
+			if (philo->taken_fork_1)
+				*philo->taken_fork_1 = 1;
+			if (philo->taken_fork_2)
+				*philo->taken_fork_2 = 1;
+			philo->taken_fork_2 = 0;
+			philo->taken_fork_1 = 0;
+			philo->num_forks = 0;
+		}
+		*/
+		//pthread_mutex_unlock(&data->mutex);
+		//usleep(42);
 	}
 	return (1);
 }

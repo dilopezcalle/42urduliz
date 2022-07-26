@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <unistd.h>
 #include <sys/time.h>
+#include <unistd.h>
 
 int    get_time(void)
 {
@@ -15,23 +15,25 @@ int    get_time(void)
 
 long ft_timer_comp(struct timeval timer)
 {
-    long result;
-	struct timeval tp;
+    struct timeval	tp;
+	long			result;
 
 	gettimeofday(&tp, NULL);
-	result = get_time(); 
+	result = (tp.tv_sec * 1000) + (tp.tv_usec / 1000);
 	result -= (timer.tv_sec * 1000) + (timer.tv_usec / 1000);
-    return (result);
+	return (result);
 }
 
 
 void	ft_usleep(long milisecons)
 {
 	struct timeval timer;
-	
+
 	gettimeofday(&timer, NULL);
 	while (milisecons > ft_timer_comp(timer))
+	{
 		usleep(500);
+	}
 }
 
 int main(void)
@@ -43,6 +45,6 @@ int main(void)
     while (1)
     {
         printf("%ld\n", get_time() - start_time);
-        ft_usleep(200);
+    	ft_usleep(200);
     }
 }

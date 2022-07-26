@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:03:00 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/09 11:03:21 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/10 14:12:18 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_get_philos(t_data *data)
 		i++;
 	}
 	aux->right = data->lst_philo;
+	(data->lst_philo)->left = aux;
 }
 
 static t_philo	*ft_new_philo(int id, t_philo *before)
@@ -51,5 +52,9 @@ static t_philo	*ft_new_philo(int id, t_philo *before)
 	new->fork = 1;
 	new->left = before;
 	new->right = 0;
+	new->num_forks = 0;
+	new->last_eat = 0;
+	new->taken_fork_1 = 0;
+	new->taken_fork_2 = 0;
 	return (new);
 }

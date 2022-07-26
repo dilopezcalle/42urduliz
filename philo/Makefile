@@ -6,7 +6,7 @@
 #    By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/25 12:54:12 by dilopez-          #+#    #+#              #
-#    Updated: 2022/07/09 08:51:24 by dilopez-         ###   ########.fr        #
+#    Updated: 2022/07/09 15:34:32 by dilopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME			=	philo
 DIR_OBJS 		=	objs/
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	-Wall -Werror -Wextra -g
 
 SRCS			=	philo.c									\
 					srcs/philo_utils.c						\

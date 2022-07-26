@@ -6,22 +6,30 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:00:35 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/09 10:02:07 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/10 17:00:11 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../philo.h"
 #include <sys/time.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-long	ft_timecomp(struct timeval timer);
-
-void	ft_msleep(long milisecons)
+void	ft_msleep(long milisecons, t_philo *philo, t_data *data)
 {
 	struct timeval	timer;
 
 	gettimeofday(&timer, NULL);
 	while (milisecons > ft_timecomp(timer))
+	{
+		if ((ft_timecomp(data->init_time) - philo->last_eat) > data->time_die)
+		{
+			printf("%ld %d died\n", ft_timecomp(data->init_time), philo->id);
+			exit(0);
+		}
 		usleep(500);
+	}
+	philo->last_eat = ft_timecomp(data->init_time);
 }
 
 long	ft_timecomp(struct timeval timer)

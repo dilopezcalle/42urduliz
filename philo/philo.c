@@ -6,12 +6,16 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:41:20 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/09 15:12:56 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/10 17:00:54 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/time.h>
 
 static void	ft_error_args(void);
 
@@ -30,30 +34,35 @@ void	ft_philo(int argc, char *argv[])
 {
 	t_data	data;
 	int		i = 0;
-	t_philo	*lst_aux;
 
+	memset(&data, 0, sizeof(t_data));
 	ft_get_args(&data, argc, argv);
 	ft_get_philos(&data);
+	gettimeofday(&data.init_time, NULL);
 	pthread_mutex_init(&data.mutex, 0);
 	pthread_mutex_init(&data.mutex2, 0);
-	lst_aux = data.lst_philo;
 	pthread_mutex_lock(&data.mutex);
 	while (i < data.num_philos)
 	{
-		pthread_mutex_lock(&data.mutex2);
+		//printf("%d\n", data.lst_philo->right->id);
 		pthread_create(&data.lst_philo->thread, 0, ft_philo_states, &data);
-		pthread_mutex_unlock(&data.mutex2);
-		ft_msleep(1);
-		pthread_mutex_lock(&data.mutex2);
+		//pthread_mutex_lock(&data.mutex2);
 		data.lst_philo = data.lst_philo->right;
-		pthread_mutex_unlock(&data.mutex2);
+		//usleep(42);
+		//pthread_mutex_lock(&data.mutex2);
 		i++;
 	}
-	pthread_mutex_unlock(&data.mutex);
-	/*
-	while(1)
-		;
-	*/
+		pthread_mutex_unlock(&data.mutex);
+	i = 0;
+	pthread_mutex_init(&data.mutex2, 0);
+	while (i < data.num_philos)
+	{
+		pthread_join(data.lst_philo->thread, 0);
+		data.lst_philo = data.lst_philo->right;
+		//usleep(42);
+		i++;
+	}
+	exit (0);
 }
 
 static void	ft_error_args(void)
