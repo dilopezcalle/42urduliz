@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:39:03 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/10 12:52:05 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/30 09:28:15 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_get_args(t_data *data, int argc, char *argv[])
 	data->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		data->num_limit_eats = ft_atoi(argv[5]);
+	else
+		data->num_limit_eats = -1;
 }
 
 static int	ft_atoi(const char *str)

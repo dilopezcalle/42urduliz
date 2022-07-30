@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:41:20 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/10 17:00:54 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/30 09:51:59 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,21 @@ void	ft_philo(int argc, char *argv[])
 	gettimeofday(&data.init_time, NULL);
 	pthread_mutex_init(&data.mutex, 0);
 	pthread_mutex_init(&data.mutex2, 0);
-	pthread_mutex_lock(&data.mutex);
 	while (i < data.num_philos)
 	{
-		//printf("%d\n", data.lst_philo->right->id);
+		pthread_mutex_lock(&data.mutex);
 		pthread_create(&data.lst_philo->thread, 0, ft_philo_states, &data);
-		//pthread_mutex_lock(&data.mutex2);
 		data.lst_philo = data.lst_philo->right;
-		//usleep(42);
-		//pthread_mutex_lock(&data.mutex2);
 		i++;
 	}
-		pthread_mutex_unlock(&data.mutex);
 	i = 0;
-	pthread_mutex_init(&data.mutex2, 0);
 	while (i < data.num_philos)
 	{
 		pthread_join(data.lst_philo->thread, 0);
 		data.lst_philo = data.lst_philo->right;
-		//usleep(42);
 		i++;
 	}
-	exit (0);
+	exit(0);
 }
 
 static void	ft_error_args(void)

@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:00:35 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/10 17:00:11 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/30 11:00:45 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+void	ft_msleep_for_eat(long milisecons, t_philo *philo, t_data *data)
+{
+	struct timeval	timer;
+
+	gettimeofday(&timer, NULL);
+	if ((ft_timecomp(data->init_time) - philo->last_eat) >= data->time_die)
+	{
+		printf("%ld %d DIED for eat\n", ft_timecomp(data->init_time), philo->id);
+		exit(0);
+	}
+	while (milisecons > ft_timecomp(timer))
+		usleep(500);
+	philo->last_eat = ft_timecomp(data->init_time);
+}
+
 void	ft_msleep(long milisecons, t_philo *philo, t_data *data)
 {
 	struct timeval	timer;
@@ -22,14 +37,18 @@ void	ft_msleep(long milisecons, t_philo *philo, t_data *data)
 	gettimeofday(&timer, NULL);
 	while (milisecons > ft_timecomp(timer))
 	{
-		if ((ft_timecomp(data->init_time) - philo->last_eat) > data->time_die)
+		if ((ft_timecomp(data->init_time) - philo->last_eat) >= data->time_die)
 		{
-			printf("%ld %d died\n", ft_timecomp(data->init_time), philo->id);
+			printf("%ld %d died1\n", ft_timecomp(data->init_time), philo->id);
 			exit(0);
 		}
 		usleep(500);
 	}
-	philo->last_eat = ft_timecomp(data->init_time);
+	if ((ft_timecomp(data->init_time) - philo->last_eat) >= data->time_die)
+	{
+		printf("%ld %d died2\n", ft_timecomp(data->init_time), philo->id);
+		exit(0);
+	}
 }
 
 long	ft_timecomp(struct timeval timer)
