@@ -6,7 +6,7 @@
 /*   By: dilopez- <dilopez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:00:12 by dilopez-          #+#    #+#             */
-/*   Updated: 2022/07/30 10:27:33 by dilopez-         ###   ########.fr       */
+/*   Updated: 2022/07/30 18:25:52 by dilopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	int				time_eat;
 	int				time_sleep;
 	int				num_limit_eats;
+	int				print_death;
 	t_philo 		*lst_philo;
 	struct timeval	init_time; 
 	pthread_mutex_t	mutex;
@@ -52,8 +53,8 @@ void				ft_get_philos(t_data *data);
 void				*ft_philo_states(void *param);
 
 // ========== UTILS ==========
-void				ft_msleep_for_eat(long milisecons, t_philo *philo, t_data *data);
-void				ft_msleep(long milisecons, t_philo *philo, t_data *data);
+void					ft_msleep_for_eat(long milisecons, t_philo *philo, t_data *data);
+void					ft_msleep(long milisecons, t_philo *philo, t_data *data);
 long				ft_timecomp(struct timeval timer);
 
 #endif
